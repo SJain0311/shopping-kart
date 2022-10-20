@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import React, { useState } from "react";
+import { StyledEngineProvider } from '@mui/material/styles';
 import data from "../../data.json";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,19 +17,14 @@ import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const navigate = useNavigate();
   const [newFormValues, setNewFormValues] = useState({});
-  const [products, setProducts] = useState(data);
+  const [products, setProducts] = useState([]);
   const [addDetail, setAddDetail] = useState({
     product: "",
     quantity: "",
     description: "",
     category: "",
   });
-  const [pageDetail, setPageDetail] = useState({
-    product: "",
-    quantity: "",
-    description: "",
-    category: "",
-  });
+  const [pageDetail, setPageDetail] = useState();
   const [editFormData, setEditFormData] = useState({
     product: "",
     quantity: "",
@@ -50,15 +46,19 @@ const AddProduct = () => {
 
     const newProduct = {
       id: nanoid(),
+      
       product: addDetail.product,
       quantity: addDetail.quantity,
       description: addDetail.description,
       category: addDetail.category,
     };
     const newProducts = [...products, newProduct];
-    setProducts(newProducts);
+    setProducts((newProducts));
+    
+  localStorage.setItem("set",JSON.stringify(products))
     // console.log("Add Data",newProducts);
   };
+
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -127,13 +127,14 @@ const AddProduct = () => {
 
     const newProduct = {
       id: nanoid(),
-      product: addDetail.product,
-      quantity: addDetail.quantity,
-      description: addDetail.description,
-      category: addDetail.category,
+      product: products.product,
+      quantity: products.quantity,
+      description: products.description,
+      category: products.category,
     };
     const newProducts = [...products, newProduct];
     setProducts(newProducts);
+    
     console.log("Add Data",newProducts);
     
     navigate("/Item", { state: { newProducts } });
@@ -143,13 +144,16 @@ const AddProduct = () => {
     });
     setProducts("");
   };
+  // setPageDetail(products)
 
   const handleDeleteToList = (event) => {};
 
   return (
     <div>
       <h1>Admin DashBoard</h1>
+      <StyledEngineProvider injectFirst>
       <form onSubmit={handleEditFormSubmit}>
+    
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 450 }} aria-label="simple table">
             <TableHead>
@@ -167,13 +171,8 @@ const AddProduct = () => {
                   <>
                     {editProductId === productItem.id ? (
                       <TableRow>
-                        <td>
-                          <input
-                            type="text"
-                            required="required"
-                            placeholder="Enter a ID..."
-                            name="id"
-                          ></input>
+                        <td >
+                          {idx}
                         </td>
                         <TableCell>
                           <TextField
@@ -272,6 +271,7 @@ const AddProduct = () => {
           name="product"
           onChange={handleAddFormChange}
           placeholder="Enter product here.."
+          value={products.product}
         />
         <TextField
           label="Quantity"
@@ -279,6 +279,7 @@ const AddProduct = () => {
           name="quantity"
           onChange={handleAddFormChange}
           placeholder="Enter product Quantity"
+          value={products.quantity}
         />
         <TextField
           label="Description"
@@ -288,6 +289,7 @@ const AddProduct = () => {
           required="required"
           placeholder="Enter a description..."
           name="description"
+          value={products.description}
           onChange={handleAddFormChange}
         />
 
@@ -297,9 +299,11 @@ const AddProduct = () => {
           name="category"
           onChange={handleAddFormChange}
           placeholder="Enter product Category"
+          value={products.category}
         />
         <Button type="submit">Add</Button>
       </form>
+      </StyledEngineProvider>
     </div>
   );
 };
