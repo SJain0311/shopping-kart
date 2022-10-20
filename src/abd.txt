@@ -1,0 +1,168 @@
+import { nanoid } from "nanoid";
+import React, { useState } from "react";
+import data from "../../data.json";
+
+const AddProduct = () => {
+  const [products, setProducts] = useState(data);
+  const [addDetail, setAddDetail] = useState({
+    product: "",
+    quantity: "",
+    description: "",
+    category: "",
+  });
+  const [editFormData, setEditFormData] = useState({
+    product: "",
+    quantity: "",
+    description: "",
+    category: "",
+  });
+  const [editProductId, setEditProductId] = useState(null);
+ 
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+    const newFormData = { ...addDetail };
+    newFormData[fieldName] = fieldValue;
+    setAddDetail(newFormData);
+  };
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    
+    const newProduct = {
+      id:nanoid(),
+      product: addDetail.product,
+      quantity: addDetail.quantity,
+      description: addDetail.description,
+      category: addDetail.category,
+    };
+    const newProducts = [...products, newProduct];
+    setProducts(newProducts);
+    console.log(products);
+  };
+
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setEditFormData(newFormData);
+  };
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editedProduct = {
+      id: editProductId,
+      product: addDetail.product,
+      quantity: addDetail.quantity,
+      description: addDetail.description,
+      category: addDetail.category,
+    };
+
+    const newProducts = [...products];
+
+    const index = products.findIndex((product) => product.id === editProductId);
+
+    newProducts[index] = editedProduct;
+
+    setProducts(newProducts);
+    setEditProductId(null);
+  };
+
+  const handleEditClick = (event, product) => {
+    event.preventDefault();
+    setEditProductId(product.id);
+
+    const formValues = {
+      product: addDetail.product,
+      quantity: addDetail.quantity,
+      description: addDetail.description,
+      category: addDetail.category,
+    };
+
+    setEditFormData(formValues);
+  };
+
+  const handleCancelClick = () => {
+    setEditProductId(null);
+  };
+
+  const handleDeleteClick = (productId) => {
+    const newProducts = [...products];
+
+    const index = products.findIndex((product) => contact.id === contactId);
+
+    newProducts.splice(index, 1);
+
+    setProducts(newProducts);
+  };
+
+
+  return (
+    <div>
+      <h1>Admin DashBoard</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((productItem, idx) => (
+            <tr>
+              <td>{productItem.id}</td>
+              <td>{productItem.product}</td>
+              <td>{productItem.quantity}</td>
+              <td>{productItem.description}</td>
+              <td>{productItem.category}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Add a Product</h2>
+      <form onSubmit={handleAddFormSubmit}>
+        <input
+          type="text"
+          name="product"
+          onChange={handleAddFormChange}
+          required="required"
+          placeholder="Enter product here.."
+        />
+        <input
+          type="text"
+          name="quantity"
+          required="required"
+          onChange={handleAddFormChange}
+          placeholder="Enter product Quantity"
+        />
+        <input
+          type="text"
+          name="description"
+          required="required"
+          onChange={handleAddFormChange}
+          placeholder="Enter product Description"
+        />
+
+        <input
+          type="text"
+          name="category"
+          required="required"
+          onChange={handleAddFormChange}
+          placeholder="Enter product Category"
+        />
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  );
+};
+
+export default AddProduct;
