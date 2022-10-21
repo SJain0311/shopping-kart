@@ -1,0 +1,107 @@
+{
+  "products": [
+    {
+      "id": 9,
+      "product": "",
+      "quantity": "",
+      "description": "ccvcvvcvc",
+      "category": "annu"
+    },
+    {
+      "id": 73,
+      "product": "",
+      "quantity": "",
+      "description": "zxz",
+      "category": ""
+    },
+    {
+      "id": 74,
+      "product": "dcdcdccccdcdc",
+      "quantity": "",
+      "description": "ccvcvvcvc",
+      "category": "Simran"
+    },
+    {
+      "id": 79,
+      "product": "S122",
+      "quantity": "2",
+      "description": "zzzz",
+      "category": "Vikas"
+    },
+    {
+      "id": 83,
+      "product": "gayatri",
+      "quantity": "2",
+      "description": "gayatri",
+      "category": "gayatri"
+    },
+    {
+      "id": 84,
+      "product": "Car",
+      "quantity": "1",
+      "description": "car",
+      "category": "car"
+    },
+    {
+      "id": 85,
+      "product": "Car",
+      "quantity": "1",
+      "description": "car",
+      "category": "car"
+    },
+    {
+      "id": 86,
+      "product": "test",
+      "quantity": "1",
+      "description": "test",
+      "category": "test"
+    },
+    {
+      "id": 87,
+      "product": "test",
+      "quantity": "1",
+      "description": "test",
+      "category": "test"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "anjali.jain031196@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "email": "",
+      "password": ""
+    },
+    {
+      "id": 3,
+      "email": "anjali.jain031196@gmail.com",
+      "password": "12345"
+    }
+  ],
+  "data": [
+    {
+      "id": 1,
+      "product": "test",
+      "quantity": "2",
+      "description": "test",
+      "category": "test"
+    },
+    {
+      "id": 2,
+      "product": "test1",
+      "quantity": "3",
+      "description": "test3",
+      "category": "test"
+    },
+    {
+      "id": 3,
+      "product": "test1",
+      "quantity": "3",
+      "description": "test3",
+      "category": "test"
+    }
+  ]
+}
