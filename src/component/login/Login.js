@@ -29,7 +29,7 @@ const Login = () => {
     console.log("helooo");
     event.preventDefault();
     const res = await axios.post("http://localhost:3001/users", userDetail);
-    navigate("/AddProduct");
+    navigate("/Item");
     setPageDetail(res.data);
     const newUser = {
     id : userDetail.id,

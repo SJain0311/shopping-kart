@@ -1,23 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import { visuallyHidden } from "@mui/utils";
-import TextField from "@mui/material/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import SearchBar from "material-ui-search-bar";
-import SearchIcon from "@mui/icons-material/Search";
-import { StyledEngineProvider } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
@@ -38,15 +24,9 @@ const Item = (props) => {
   const [count, setCount] = React.useState(0);
   const [invisible, setInvisible] = React.useState(false);
   const location = useLocation();
-  console.log("location", location.state);
-  // const productData = location.state.newProducts;
-  // console.log("item", productData);
+  // console.log("location", location.pathname.);
   const [itemData,setItemData] = useState([])
   // console.log("itemdata",itemData)
-  const [selected, setSelected] = React.useState([]);
-  const [inputText, setInputText] = useState("");
-  const [filteredList, setFilteredList] = useState([]);
-  const [searched, setSearched] = useState("");
   const [query,setQuery]=useState("");
   const [itemCount, setItemCount] = useState(0);
   const handleBadgeVisibility = () => {
@@ -54,8 +34,9 @@ const Item = (props) => {
   };
 
   const getProduct = async () => {
+    // e.preventDefault();
     try {
-      const res = await axios.get("http://localhost:3001/data");
+      const res = await axios.get(`http://localhost:3001/showList/`);
       if(res.status===200){
         setItemData(res.data)
       }
@@ -99,14 +80,14 @@ const Item = (props) => {
           id="search-box"
           onChange={(e) => setQuery(e.target.value)}
           className="search"
-          placeholder="...Search"
+          placeholder="...Search By product name"
         />
       </div>
       <div>
         <h2 style={{ textAlign: "center" }}>Product Card</h2>
         {itemData.filter((data)=>data.product.toString().toLowerCase().indexOf(query.toLowerCase()) !== -1).map((data, index) => (
           <div className="card">
-            <label /> <h1>{data.product}</h1>
+            <label /> <p>{data.product}</p>
  
               <p className="price">{data.quantity}</p>
             <p>{data.description}</p>

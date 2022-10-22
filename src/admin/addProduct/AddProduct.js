@@ -20,7 +20,16 @@ const AddProduct = () => {
   const [newFormValues, setNewFormValues] = useState({});
   const [getdata, setGetData] = useState([]);
   const [products, setProducts] = useState([]);
+  const [list, setLists] = useState([]);
   const [addDetail, setAddDetail] = useState({
+    id: "",
+    product: "",
+    quantity: "",
+    description: "",
+    category: "",
+  });
+
+  const [addList, setAddList] = useState({
     id: "",
     product: "",
     quantity: "",
@@ -80,10 +89,6 @@ const AddProduct = () => {
     };
     const newProducts = [...products, newProduct];
     setProducts(newProducts);
-
-    console.log("ppppppp", products);
-    // localStorage.setItem("set", JSON.stringify(products));
-    // console.log("Add Data",newProducts);
   };
 
   const handleEditFormChange = (event) => {
@@ -118,26 +123,6 @@ const AddProduct = () => {
     });
   };
 
-  // const res = await axios.put("http://localhost:3001/products",editedProduct);
-  // console.log("Reid res ", res.data)
-
-  // setEditFormData(
-  //   res.data.filter((product) => {
-  //      return product.id !== newid.id;
-  //    })
-  //  );
-  //  console.log("edit id",editFormData)
-
-  // const newProducts = [...products];
-
-  // const index = products.findIndex((product) => product.id === editProductId);
-
-  // newProducts[index] = editedProduct;
-
-  // setProducts(newProducts);
-  //   setEditProductId(null);
-  // };
-
   const handleEditClick = (event, productItem) => {
     event.preventDefault();
     setEditProductId(productItem.id);
@@ -166,38 +151,36 @@ const AddProduct = () => {
         return product.id !== newid;
       })
     );
-    // const newProducts = [...products];
-
-    // const index = products.findIndex((product) => product.id === productId);
-
-    // newProducts.splice(index, 1);
-
-    // setProducts(newProducts);
   };
 
-  // const handleAddToList = (e) => {
-  //   e.preventDefault();
+  const handleListDelete = async (Listid) => {
+    console.log("id---", Listid);
 
-  //   const newProduct = {
-  //     id: products.id,
-  //     product: products.product,
-  //     quantity: products.quantity,
-  //     description: products.description,
-  //     category: products.category,
-  //   };
-  //   const newProducts = [...products, newProduct];
-  //   setProducts(newProducts);
+    const res = await axios.delete("http://localhost:3001/showList/" + Listid);
+    setProducts(
+      products.filter((product) => {
+        return product.id !== Listid;
+      })
+    );
+  };
 
-  //   console.log("Add Data", newProducts);
-
-  //   navigate("/Item", state={ newPro:newP});
-  //   e.preventDefault();
-  //   setNewFormValues((prevValues) => {
-  //     return [...prevValues, newProduct];
-  //   });
-  //   setProducts("");
-  // };
-  // setPageDetail(products)
+  const handleList = async (newitemData) => {
+    console.log("newitemDatanewwwwwwwwwwwwwwwwwww", newitemData);
+    const res = await axios.post("http://localhost:3001/showList/", newitemData);
+    navigate("/Item")
+    console.log("simran", res);
+    // console.log("simran", res.data);
+    var newList = {
+      id: products.id,
+      product: products.product,
+      quantity: products.quantity,
+      description: products.description,
+      category: products.category,
+    };
+    const newListData = [...list, newList];
+    setLists(newListData);
+    console.log("addList", addList);
+  };
 
   return (
     <div>
@@ -275,7 +258,7 @@ const AddProduct = () => {
                         </TableRow>
                       ) : (
                         <TableRow>
-                          <td>{productItem.id}</td>
+                          <TableCell>{productItem.id}</TableCell>
                           <TableCell>{productItem.product}</TableCell>
                           <TableCell>{productItem.quantity}</TableCell>
                           <TableCell>{productItem.description}</TableCell>
@@ -299,33 +282,12 @@ const AddProduct = () => {
                         </TableRow>
                       )}
                     </>
-                    {/* <Link
-                      to={`/Item`}
-                      onClick={() => {
-                        console.log("Hello", productItem.id);
-                        navigate(`/Item/${productItem.id}/`, {
-                          state: { itemId: JSON.stringify(productItem.id) },
-                        });
-                      }}
-                      className="text-decoration text-violet font-weight-bold"
-                    >
-                      Add To List
-                    </Link> */}
-                    <Button
-                      type="button"
-                      style={{ textAlign: "center" }}
-                    >
-                      <Link
-                      to={`/Item`}
-                      onClick={() => {
-                        console.log("Hello", productItem.id);
-                        navigate(`/Item/${productItem.id}/`, {
-                          state: { itemId: JSON.stringify(productItem.id) },
-                        });
-                      }}
-                    >
-                      Add To List
-                    </Link>
+
+                    <Button onClick={(e) => handleList(productItem)}>
+                      Add to List
+                    </Button>
+                    <Button onClick={(e) => handleListDelete(productItem.id)}>
+                     Remove To List
                     </Button>
                   </>
                 ))}
