@@ -5,6 +5,7 @@ import axios from "axios";
 import {  useNavigate } from "react-router-dom";
 
 const Login = () => {
+  
   const navigate = useNavigate();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -25,11 +26,10 @@ const Login = () => {
     setUserDetail(newFormData);
   };
 
-  const submitHandler = async (event) => {
-    console.log("helooo");
-    event.preventDefault();
+  const submitHandler = async (e) => {
+    e.preventDefault();
     const res = await axios.post("http://localhost:3001/users", userDetail);
-    navigate("/Item");
+    navigate("/Home");
     setPageDetail(res.data);
     const newUser = {
     id : userDetail.id,

@@ -165,10 +165,9 @@ const AddProduct = () => {
   };
 
   const handleList = async (newitemData) => {
-    console.log("newitemDatanewwwwwwwwwwwwwwwwwww", newitemData);
     const res = await axios.post("http://localhost:3001/showList/", newitemData);
-    navigate("/Item")
-    console.log("simran", res);
+    navigate("/Home")
+    console.log("res", res);
     // console.log("simran", res.data);
     var newList = {
       id: products.id,
