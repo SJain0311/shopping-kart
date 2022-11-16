@@ -302,34 +302,6 @@
   ],
   "showList": [
     {
-      "id": 12,
-      "product": "Test",
-      "quantity": "2",
-      "description": "test",
-      "category": "test"
-    },
-    {
-      "id": 8,
-      "product": "test8",
-      "quantity": "8",
-      "description": "test8",
-      "category": "test8"
-    },
-    {
-      "id": 10,
-      "product": "testtt",
-      "quantity": "3",
-      "description": "test",
-      "category": "test"
-    },
-    {
-      "id": 1,
-      "product": "testHe",
-      "quantity": "4",
-      "description": "test",
-      "category": "testHere"
-    },
-    {
       "id": 3,
       "product": "test",
       "quantity": "2",
@@ -344,11 +316,25 @@
       "category": "abc"
     },
     {
-      "id": 17,
-      "product": "TestAbc",
-      "quantity": "2",
-      "description": "testabc",
-      "category": "testabc"
+      "id": 9,
+      "product": "test9",
+      "quantity": "3",
+      "description": "test",
+      "category": "test5"
+    },
+    {
+      "id": 1,
+      "product": "testHere",
+      "quantity": "4",
+      "description": "test",
+      "category": "testHere"
+    },
+    {
+      "id": 8,
+      "product": "test8",
+      "quantity": "8",
+      "description": "test8",
+      "category": "test8"
     }
   ]
 }

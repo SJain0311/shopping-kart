@@ -1,7 +1,7 @@
 import React from "react";
 import './All.css'
 
-const Card = ({ item, handleClick }) => {
+const Card = ({ item, handleClick  }) => {
   const {id, product, description, category, quantity } = item;
   return (
     <div className="cards">
